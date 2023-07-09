@@ -111,10 +111,11 @@ if (!ctx) throw new Error("Failed to get canvas context")
 const center = new Vector2(canvasSize / 2, canvasSize / 2)
 const radius = 80
 const divisions = 6
+const depth = 2
 
 ;(async () => {
   // Generate points of the base polygon.
-  const points = drawRecursive(ctx, center, radius, divisions, 0, 3)
+  const points = drawRecursive(ctx, center, radius, divisions, 0, depth)
   // Draw outline of the base polygon.
   await drawClosedPath(ctx, points, 4, "white")
   // Generate triangles from the points of the base polygon.
@@ -123,9 +124,9 @@ const divisions = 6
   while (pointIndices.length > 2) {
     // Find a triangle that the corner angle is closest to 60 degrees.
     const { index: i, triangle } = pointIndices.reduce((prev, _, i) => {
-      const iP = pointIndices[i-1] ?? pointIndices[pointIndices.length - 1]
+      const iP = pointIndices[i - 1] ?? pointIndices[pointIndices.length - 1]
       const iC = pointIndices[i]
-      const iN = pointIndices[i+1] ?? pointIndices[0]
+      const iN = pointIndices[i + 1] ?? pointIndices[0]
       const pP = points[iP]
       const pC = points[iC]
       const pN = points[iN]
