@@ -10,16 +10,6 @@ function drawCircle(ctx: CanvasRenderingContext2D , center: Vector2, radius: num
   ctx.fill()
 }
 
-function drawLine(ctx: CanvasRenderingContext2D, p1: Vector2, p2: Vector2, width: number = 1, color: string = "red") {
-  ctx.beginPath()
-  ctx.moveTo(p1.x, p1.y)
-  ctx.lineTo(p2.x, p2.y)
-  ctx.closePath()
-  ctx.strokeStyle = color
-  ctx.lineWidth = width
-  ctx.stroke()
-}
-
 async function drawClosedPath(ctx: CanvasRenderingContext2D, points: Vector2[], width: number = 1, color: string = "red", fillColor?: string) {
   ctx.beginPath()
   ctx.moveTo(points[0].x, points[0].y)
@@ -142,7 +132,7 @@ const divisions = 6
       const vCP = pP.sub(pC)
       const vCN = pN.sub(pC)
       const angle = calcDiffAngle(vCN, vCP)
-      const diff = Math.abs(angle - Math.PI / 2)
+      const diff = Math.abs(angle - Math.PI / 3)
       if (angle < Math.PI && diff < prev.diff) {
         const inTriangle = pointIndices.some((index) => {
           if (index === iP || index === iC || index === iN) return false
@@ -158,7 +148,6 @@ const divisions = 6
     pointIndices.splice(i, 1)
     triangles.push(triangle)
   }
-  console.log(triangles)
   function delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
