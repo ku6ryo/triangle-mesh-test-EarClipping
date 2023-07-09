@@ -121,7 +121,7 @@ const divisions = 6
   const pointIndices = points.map((_, i) => i)
   const triangles: number[][] = []
   while (pointIndices.length > 2) {
-    // Find a triangle that the corner angle is closest to 90 degrees.
+    // Find a triangle that the corner angle is closest to 60 degrees.
     const { index: i, triangle } = pointIndices.reduce((prev, _, i) => {
       const iP = pointIndices[i-1] ?? pointIndices[pointIndices.length - 1]
       const iC = pointIndices[i]
